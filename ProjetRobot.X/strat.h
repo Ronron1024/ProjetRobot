@@ -1,0 +1,61 @@
+/* 
+ * File:   strat.h
+ * Author: TP-EO-5
+ *
+ * Created on 17 février 2020, 18:01
+ */
+
+#ifndef STRAT_H
+#define	STRAT_H
+
+
+// SPEED
+#define NORMAL_SPEED 30
+#define SLOW_SPEED 15
+#define FAST_SPEED 50
+
+#define BACKWARD 0
+#define FORWARD 1
+#define STOP 2
+
+
+// DISTANCES
+#define TELEMETRE0_SLOW_DISTANCE 
+
+
+// STATES
+#define STATE_ATTENTE 0
+#define STATE_ATTENTE_EN_COURS 1
+#define STATE_AVANCE 2
+#define STATE_AVANCE_EN_COURS 3
+#define STATE_TOURNE_GAUCHE 4
+#define STATE_TOURNE_GAUCHE_EN_COURS 5
+#define STATE_TOURNE_DROITE 6
+#define STATE_TOURNE_DROITE_EN_COURS 7
+#define STATE_TOURNE_SUR_PLACE_GAUCHE 8
+#define STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS 9
+#define STATE_TOURNE_SUR_PLACE_DROITE 10
+#define STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS 11
+#define STATE_RALENTIR 12
+#define STATE_SLOW_EN_COURS 13
+#define STATE_SLOW 14
+#define STATE_FAST 15
+#define STATE_FAST_EN_COURS 16
+
+
+// OBSTACLES
+#define PAS_D_OBSTACLE 0
+#define OBSTACLE_A_GAUCHE 1
+#define OBSTACLE_A_DROITE 2
+#define OBSTACLE_A_VENIR_EN_FACE 3
+#define OBSTACLE_EN_FACE 4
+
+
+// PROTOTYPES
+void OperatingSystemLoop(void);
+void SetNextRobotStateInAutomaticMode();
+void setMode(char);
+
+
+#endif	/* STRAT_H */
+
