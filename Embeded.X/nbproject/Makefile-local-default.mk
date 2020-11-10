@@ -35,3 +35,4 @@ MP_AS_DIR="C:\Program Files\Microchip\xc16\v1.60\bin"
 MP_LD_DIR="C:\Program Files\Microchip\xc16\v1.60\bin"
 MP_AR_DIR="C:\Program Files\Microchip\xc16\v1.60\bin"
 # MP_BC_DIR is not defined
+DFP_DIR=C:/Users/TP-EO-1/.mchp_packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.1.33

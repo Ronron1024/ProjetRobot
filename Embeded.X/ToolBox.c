@@ -1,9 +1,12 @@
+// <editor-fold defaultstate="collapsed" desc="Includes">
 #include <xc.h>
 #include "robot.h"
 #include "ToolBox.h"
 #include "IO.h"
 #include "PWM.h"
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Math">
 float Abs(float value) {
     if (value >= 0)
         return value;
@@ -40,8 +43,9 @@ float RadianToDegree(float value) {
 float DegreeToRadian(float value) {
     return value * PI / 180.0;
 }
+// </editor-fold>
 
-
+// <editor-fold defaultstate="collapsed" desc="Hardware">
 void testADC(void)
 {
     if (robotState.distanceTelemetre0 < 30 || robotState.distanceTelemetre1 < 30 || robotState.distanceTelemetre2 < 30 || robotState.distanceTelemetre3 < 30 || robotState.distanceTelemetre4 < 30)
@@ -63,3 +67,4 @@ void testADC(void)
         LED_ORANGE = LED_BLEUE = LED_BLANCHE = 0;
     }
 }
+// </editor-fold>

@@ -1,36 +1,43 @@
 #ifndef IO_H
 #define IO_H
 
+// <editor-fold defaultstate="collapsed" desc="LEDS">
 //Affectation des pins des LEDS
 #define LED_ORANGE _LATC10 
 #define LED_BLEUE _LATG7
 #define LED_BLANCHE _LATG6
-// Hacheurs
-#define MOTEUR1_IN1 _LATB14
-#define MOTEUR1_IN2 _LATB15
+// </editor-fold>
 
-#define MOTEUR6_IN1 _LATC6
-#define MOTEUR6_IN2 _LATC7
+// <editor-fold defaultstate="collapsed" desc="Choppers">
+#define MOTOR1_IN1 _LATB14
+#define MOTOR1_IN2 _LATB15
 
-// moteur gauche
-#define MOTEUR_GAUCHE_INH MOTEUR1_IN1
-#define MOTEUR_GAUCHE_INL MOTEUR1_IN2
-#define MOTEUR_GAUCHE_ENL IOCON1bits.PENL
-#define MOTEUR_GAUCHE_ENH IOCON1bits.PENH
-#define MOTEUR_GAUCHE_DUTY_CYCLE PDC1
+#define MOTOR6_IN1 _LATC6
+#define MOTOR6_IN2 _LATC7
+// </editor-fold>
 
-// moteur droit
-#define MOTEUR_DROIT_INH MOTEUR6_IN1
-#define MOTEUR_DROIT_INL MOTEUR6_IN2
-#define MOTEUR_DROIT_ENL IOCON6bits.PENL
-#define MOTEUR_DROIT_ENH IOCON6bits.PENH
-#define MOTEUR_DROIT_DUTY_CYCLE PDC6
+// <editor-fold defaultstate="collapsed" desc="Motors">
+// Left motor
+#define LEFT_MOTOR_INH MOTOR1_IN1
+#define LEFT_MOTOR_INL MOTOR1_IN2
+#define LEFT_MOTOR_ENL IOCON1bits.PENL
+#define LEFT_MOTOR_ENH IOCON1bits.PENH
+#define LEFT_MOTOR_DUTY_CYCLE PDC1
 
-// JACK
+// Right motor
+#define RIGHT_MOTOR_INH MOTOR6_IN1
+#define RIGHT_MOTOR_INL MOTOR6_IN2
+#define RIGHT_MOTOR_ENL IOCON6bits.PENL
+#define RIGHT_MOTOR_ENH IOCON6bits.PENH
+#define RIGHT_MOTOR_DUTY_CYCLE PDC6
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="JACK">
 #define JACK _RA1
+// </editor-fold>
 
-
-// Prototypes fonctions
+// <editor-fold defaultstate="collapsed" desc="Prototypes">
 void InitIO();
+// </editor-fold>
 
 #endif /* IO_H */

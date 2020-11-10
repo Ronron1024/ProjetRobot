@@ -1,3 +1,4 @@
+// <editor-fold defaultstate="collapsed" desc="Includes">
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
@@ -15,37 +16,53 @@
 #include "strat.h"
 #include "main.h"
 #include <stdlib.h>
-
+// </editor-fold>
 
 int main(void) {
-    /***************************************************************************************************/
-    //Initialisations
-    /****************************************************************************************************/
+    
+    // <editor-fold defaultstate="collapsed" desc="Variables">
+    // Telemeters [Must be replaced by the SICK Lidar]
+    /*unsigned int* result;
+    unsigned char ir_data[5] = {0};
+    float volts = 0;*/
+    
+    // Misc
+    int i;
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Initialization">
     InitOscillator();
     InitIO();
-    InitTimer23();
-    InitTimer1();
-    InitTimer4();
     InitPWM();
     InitADC1();
     InitUART();
-
-    // VARIABLES
-    char initRand = 1;
-    unsigned int* result;
-    float volts = 0;
-    int i;
+    //InitTimer23(); Void
+    //InitTimer1(); ADC
+    InitTimer4();
     
-    unsigned char ir_data[5] = {0};
+    // Init Random [May be done otherwise ?]
+    ADC1StartConversionSequence();
+    while (!ADCIsConversionFinished())
+    {
+        
+    }
+    // </editor-fold>
 
-    /****************************************************************************************************/
-    // Boucle Principale
-    /****************************************************************************************************/
+    
+    
+    
+    
+    // FIX
     setMode(MANUAL);
     robotState.direction = STOP;
+    
+    
+    
+    // <editor-fold defaultstate="collapsed" desc="Main Loop">
     while (1) {
         
-        if (ADCIsConversionFinished()) 
+        // <editor-fold defaultstate="collapsed" desc="Telemeters conversion [must be replaced by SICK Lidar]">
+        /*if (ADCIsConversionFinished()) 
         {
             ADCClearConversionFinishedFlag();
 
@@ -68,14 +85,14 @@ int main(void) {
             ir_data[4] = (unsigned char) robotState.distanceTelemetre4;
             
             uartEncodeAndSendMessage(0x30, 5, ir_data);
-            
-            if (initRand)
-            {
-                srand(result[2]);
-                initRand=0;
-                
-            }
-        }
+        }*/
+        // </editor-fold>
+
+
+        
+        
+        
+    /***************************************************************************************************/
         
 //        uartEncodeAndSendMessage(0x80, 5, (unsigned char*) "Miaou");
 //        __delay32(40000000);
@@ -91,6 +108,10 @@ int main(void) {
         {
             uartDecodeMessage(CB_RX1_Get());
         }
-    } 
+    }
+    // </editor-fold>
+
+    
+    
     return 0;
 }

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=ProjetRobot.X
+PROJECTNAME=Embeded.X
 
 # Active Configuration
 DEFAULTCONF=default

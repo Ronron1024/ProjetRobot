@@ -19,3 +19,8 @@ C:\Github\Robot-Andre-Mihalic\Partie2\ExtendedSerialPort\bin\Debug\ExtendedSeria
 C:\Github\Robot-Andre-Mihalic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.csprojAssemblyReference.cache
 C:\Github\Robot-Andre-Mihalic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.dll
 C:\Github\Robot-Andre-Mihalic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.pdb
+C:\Github\ProjetAntolic\Partie2\ExtendedSerialPort\bin\Debug\ExtendedSerialPort.dll
+C:\Github\ProjetAntolic\Partie2\ExtendedSerialPort\bin\Debug\ExtendedSerialPort.pdb
+C:\Github\ProjetAntolic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.csprojAssemblyReference.cache
+C:\Github\ProjetAntolic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.dll
+C:\Github\ProjetAntolic\Partie2\ExtendedSerialPort\obj\Debug\ExtendedSerialPort.pdb

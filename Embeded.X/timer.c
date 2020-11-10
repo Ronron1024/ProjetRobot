@@ -1,3 +1,4 @@
+// <editor-fold defaultstate="collapsed" desc="Includes">
 #include <xc.h>
 #include "timer.h"
 #include "PWM.h"
@@ -6,12 +7,12 @@
 #include "strat.h"
 #include "main.h"
 #include "robot.h"
+// </editor-fold>
 
-
-
-//Initialisation d'un timer 32 bits
 unsigned long timestamp;
 
+// <editor-fold defaultstate="collapsed" desc="Timer23">
+//Initialisation d'un timer 32 bits (Freq = 1Hz)
 void InitTimer23(void) {
     T3CONbits.TON = 0; // Stop any 16-bit Timer3 operation
     T2CONbits.TON = 0; // Stop any 16/32-bit Timer3 operation
@@ -29,16 +30,15 @@ void InitTimer23(void) {
     /* Example code for Timer3 ISR */
 }
 
-unsigned char toggle = 0;
 //Interruption du timer 32 bits sur 2-3
-
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
-
+    LED_ORANGE = !LED_ORANGE;
 }
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Timer1">
 //Initialisation d'un timer 16 bits
-
 void InitTimer1(void) {
     //Timer1 pour horodater les mesures (1ms)
     T1CONbits.TON = 0; // Disable Timer
@@ -73,18 +73,15 @@ void SetFreqTimer1(float freq) {
         PR1 = (int) (FCY / freq);
 }
 
-
-
-
-//Interruption du timer 1
-
+// Timer1 Interrupt
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;   
 
     ADC1StartConversionSequence();
 }
+// </editor-fold>
 
-/*timer4 */
+// <editor-fold defaultstate="collapsed" desc="Timer4">
 void InitTimer4(void) {
     //Timer1 pour horodater les mesures (1ms)
     T4CONbits.TON = 0; // Disable Timer
@@ -119,16 +116,12 @@ void SetFreqTimer4(float freq) {
         PR1 = (int) (FCY / freq);
 }
 
-
-
-
-//Interruption du timer 1
-
+// Timer4 Interrupt
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     IFS1bits.T4IF = 0;
-
+    
     timestamp++;
-
-    if (robotState.mode == AUTO || robotState.mode == MANUAL)
-        OperatingSystemLoop();
+    
+    OperatingSystemLoop();
 }
+// </editor-fold>
