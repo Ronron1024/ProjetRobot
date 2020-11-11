@@ -50,7 +50,7 @@ namespace RobotInterface
 
             robot = new Robot();
 
-            serialPort = new ReliableSerialPort("COM23", 115200, Parity.None, 8, StopBits.One);
+            serialPort = new ReliableSerialPort("COM5", 115200, Parity.None, 8, StopBits.One);
             serialPort.DataReceived += SerialPort_DataReceived;
             serialPort.Open();
 

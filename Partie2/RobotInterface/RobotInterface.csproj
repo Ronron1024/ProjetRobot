@@ -35,8 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MouseKeyboardActivityMonitor">
-      <HintPath>..\MouseKeyboardActivityMonitor.dll</HintPath>
+    <Reference Include="ExtendedSerialPort, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\ExtendedSerialPort.dll</HintPath>
+    </Reference>
+    <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.17650, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\MouseKeyboardActivityMonitor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,12 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExtendedSerialPort\ExtendedSerialPort.csproj">
-      <Project>{21ac599e-e3d5-4181-aa0f-7c2e00cca016}</Project>
-      <Name>ExtendedSerialPort</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
