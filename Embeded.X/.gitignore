@@ -2,3 +2,6 @@
 build/
 debug/
 dist/
+nbproject/Makefile-*
+nbproject/private/
+nbproject/Package-*.bash
