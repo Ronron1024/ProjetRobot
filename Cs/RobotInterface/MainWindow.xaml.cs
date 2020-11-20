@@ -10,6 +10,7 @@ using System.Windows.Interop;
 using MouseKeyboardActivityMonitor.WinApi;
 using MouseKeyboardActivityMonitor;
 using System.Windows.Forms;
+using Utilities;
 
 namespace RobotInterface
 {
@@ -50,7 +51,7 @@ namespace RobotInterface
 
             robot = new Robot();
 
-            serialPort = new ReliableSerialPort("COM5", 115200, Parity.None, 8, StopBits.One);
+            serialPort = new ReliableSerialPort("COM23", 115200, Parity.None, 8, StopBits.One);
             serialPort.DataReceived += SerialPort_DataReceived;
             serialPort.Open();
 
@@ -245,6 +246,33 @@ namespace RobotInterface
                     robot.receive_text = System.Text.Encoding.Default.GetString(payload);
                     break;
 
+                case 0x61:
+                    string display = "";
+
+                    byte[] timestamp_array = payload.GetRange(0, 4);
+                    Array.Reverse(timestamp_array);
+                    int timestamp = BitConverter.ToInt32(timestamp_array, 0);
+
+                    byte[] xpos_array = payload.GetRange(4, 4);
+                    float xpos = xpos_array.GetFloat();
+
+                    byte[] ypos_array = payload.GetRange(8, 4);
+                    float ypos = ypos_array.GetFloat();
+
+                    byte[] angle_array = payload.GetRange(12, 4);
+                    float angle = angle_array.GetFloat();
+
+                    byte[] vit_lin_array = payload.GetRange(16, 4);
+                    float vit_lin = vit_lin_array.GetFloat();
+
+                    byte[] vit_ang_array = payload.GetRange(20, 4);
+                    float vit_ang = vit_ang_array.GetFloat();
+
+                    display = "time=" + timestamp + ";xpos=" + xpos + ";ypos=" + ypos + ";angle=" + angle + ";vit_lin=" + vit_lin + ";vit_angle=" + vit_ang;
+
+                    robot.receive_text = display;
+                    break;
+
                 default: // Unknow command
                     break;
             }
@@ -263,11 +291,14 @@ namespace RobotInterface
         {
             while (robot.byteListReceived.Count != 0)
                 textbox_out.Text += "0x" + robot.byteListReceived.Dequeue().ToString("X2") + " ";
+            
             if (robot.receive_text != "")
             {
-                textbox_out.Text += robot.receive_text;
+                textbox_out.Text += robot.receive_text + "\n";
                 robot.receive_text = "";
             }
+
+            textbox_out.ScrollToEnd();
 
             // Collection de labels ?
             label_ir0.Content = robot.ir_data[0] + "cm";

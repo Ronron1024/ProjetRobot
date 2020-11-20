@@ -7,7 +7,6 @@
       <itemPath>ChipConfig.h</itemPath>
       <itemPath>IO.h</itemPath>
       <itemPath>PWM.h</itemPath>
-      <itemPath>ToolBox.h</itemPath>
       <itemPath>adc.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>robot.h</itemPath>
@@ -17,6 +16,8 @@
       <itemPath>CB_TX1.h</itemPath>
       <itemPath>CB_RX1.h</itemPath>
       <itemPath>uart_protocol.h</itemPath>
+      <itemPath>QEI.h</itemPath>
+      <itemPath>utilities.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,7 +29,6 @@
       <itemPath>ChipConfig.c</itemPath>
       <itemPath>IO.c</itemPath>
       <itemPath>PWM.c</itemPath>
-      <itemPath>ToolBox.c</itemPath>
       <itemPath>adc.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>robot.c</itemPath>
@@ -38,6 +38,8 @@
       <itemPath>CB_TX1.c</itemPath>
       <itemPath>CB_RX1.c</itemPath>
       <itemPath>uart_protocol.c</itemPath>
+      <itemPath>QEI.c</itemPath>
+      <itemPath>utilities.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -83,7 +85,6 @@
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
-        <makeUseCleanTarget>false</makeUseCleanTarget>
         <makeCustomizationPreStep></makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
         <makeCustomizationPostStep></makeCustomizationPostStep>

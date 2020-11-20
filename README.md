@@ -1,1 +1,3 @@
-ProjetRobot
+TODO :
+	Fréquence Timers
+	Init Random

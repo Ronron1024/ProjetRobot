@@ -14,6 +14,7 @@
 #include "CB_TX1.h"
 #include "CB_RX1.h"
 #include "strat.h"
+#include "QEI.h"
 #include "main.h"
 #include <stdlib.h>
 // </editor-fold>
@@ -33,19 +34,21 @@ int main(void) {
     // <editor-fold defaultstate="collapsed" desc="Initialization">
     InitOscillator();
     InitIO();
+    InitQEI1();
+    InitQEI2();
     InitPWM();
     InitADC1();
     InitUART();
     //InitTimer23(); Void
-    //InitTimer1(); ADC
-    InitTimer4();
+    InitTimer1(); // QEI
+    InitTimer4(); // timestamp
     
     // Init Random [May be done otherwise ?]
-    ADC1StartConversionSequence();
-    while (!ADCIsConversionFinished())
-    {
-        
-    }
+//    ADC1StartConversionSequence();
+//    while (!ADCIsConversionFinished())
+//    {
+//        
+//    }
     // </editor-fold>
 
     
@@ -87,22 +90,6 @@ int main(void) {
             uartEncodeAndSendMessage(0x30, 5, ir_data);
         }*/
         // </editor-fold>
-
-
-        
-        
-        
-    /***************************************************************************************************/
-        
-//        uartEncodeAndSendMessage(0x80, 5, (unsigned char*) "Miaou");
-//        __delay32(40000000);
-//        
-//        for (i = 0; i < CB_RX1_GetDataSize(); i++)
-//        {
-//            unsigned char c = CB_RX1_Get();
-//            SendMessage(&c, 1);
-//        }
-//        __delay32(1000);
         
         for (i = 0; i < CB_RX1_GetDataSize(); i++)
         {

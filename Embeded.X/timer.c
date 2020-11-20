@@ -7,6 +7,8 @@
 #include "strat.h"
 #include "main.h"
 #include "robot.h"
+#include "CB_TX1.h"
+#include "QEI.h"
 // </editor-fold>
 
 unsigned long timestamp;
@@ -33,7 +35,6 @@ void InitTimer23(void) {
 //Interruption du timer 32 bits sur 2-3
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
-    LED_ORANGE = !LED_ORANGE;
 }
 // </editor-fold>
 
@@ -53,7 +54,7 @@ void InitTimer1(void) {
     IFS0bits.T1IF = 0; // Clear Timer Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer interrupt
     T1CONbits.TON = 1; // Enable Timer
-    SetFreqTimer1(100);
+    SetFreqTimer1(FREQ_TIMER1);
 }
 
 void SetFreqTimer1(float freq) {
@@ -77,7 +78,8 @@ void SetFreqTimer1(float freq) {
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;   
 
-    ADC1StartConversionSequence();
+    //ADC1StartConversionSequence();
+    QEIUpdateData();
 }
 // </editor-fold>
 
@@ -96,7 +98,7 @@ void InitTimer4(void) {
     IFS1bits.T4IF = 0; // Clear Timer Interrupt Flag
     IEC1bits.T4IE = 1; // Enable Timer interrupt
     T4CONbits.TON = 1; // Enable Timer
-    SetFreqTimer4(1000);
+    SetFreqTimer4(FREQ_TIMER4);
 }
 
 void SetFreqTimer4(float freq) {
@@ -122,6 +124,6 @@ void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     
     timestamp++;
     
-    OperatingSystemLoop();
+    SendPositionData();
 }
 // </editor-fold>
