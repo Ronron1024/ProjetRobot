@@ -47,9 +47,9 @@ void QEIUpdateData()
     
     //Calcul des deltas de positions
     delta_d = QeiDroitPosition - QeiDroitPosition_T_1;
-    delta_g = QeiDroitPosition - QeiDroitPosition_T_1;
+    delta_g = QeiGauchePosition - QeiGauchePosition_T_1;
     //delta_theta = atan((delta_d - delta_g) /DISTROUE);
-    delta_theta = (delta_d - delta_g) /DISTROUES ; 
+    delta_theta = (delta_d - delta_g) / DISTROUES ; 
     dx = (delta_d + delta_g)/2;
     
     //Calcul des vitesses 
@@ -65,8 +65,7 @@ void QEIUpdateData()
     robotState.angleRadianFromOdometry_1 = robotState.angleRadianFromOdometry;
     
     // Calcul des positions dans le référentiel du terrain
-    //robotState.xPosFromOdometry += dx*cos(robotState.angleRadianFromOdometry);
-    robotState.xPosFromOdometry = QeiDroitPosition;
+    robotState.xPosFromOdometry += dx*cos(robotState.angleRadianFromOdometry);
     robotState.yPosFromOdometry += dx*sin(robotState.angleRadianFromOdometry);
     robotState.angleRadianFromOdometry += delta_theta;
     
