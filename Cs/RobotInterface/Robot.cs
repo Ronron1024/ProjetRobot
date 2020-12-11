@@ -90,7 +90,7 @@ namespace RobotInterface
                     byte[] vit_ang_array = payload.GetRange(20, 4);
                     float vit_ang = vit_ang_array.GetFloat();
 
-                    display = "time=" + timestamp + ";xpos=" + xpos + ";ypos=" + ypos + ";angle=" + angle + ";vit_lin=" + vit_lin + ";vit_angle=" + vit_ang;
+                    display = "time=" + timestamp + "\t\t\txpos=" + xpos + "\t\t\typos=" + ypos + "\t\t\tangle=" + angle + "\t\t\tvit_lin=" + vit_lin + "\t\t\tvit_angle=" + vit_ang;
 
                     receive_text = display;
                     break;

@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-    #define DISTROUES 281.2 //Valeur à surement redefinir 
+    #define DISTROUES 0.221 //Valeur à surement redefinir 
     #define RESOLUTION_M 0.00001629854 //distance parcourue pour un point 
     #define FREQ_ECH_QEI 250 //frequence echantillonage
     #define POSITION_DATA 0x0061 

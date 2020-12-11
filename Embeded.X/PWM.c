@@ -106,10 +106,32 @@ void PWMUpdateSpeed() {
     LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante) * PWMPER;
 }
 
-void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur) {
+void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur) 
+{
     if (moteur == MOTEUR_DROIT)
         robotState.vitesseDroiteConsigne = vitesseEnPourcents;
     else if (moteur == MOTEUR_GAUCHE)
         robotState.vitesseGaucheConsigne = vitesseEnPourcents;
 }
 
+void PWMSetSpeedConsignePolaire()
+{
+    //Correction Angulaire 
+    double erreurVitesseAngulaire = ;
+    double sortieCorrecteurAngulaire = ; 
+    double correctionVitesseAngulaire = ;
+    double correctionVitesseAngulairePourcent = correctionVitesseAngulaire * COEFF_VITESSE_ANGULAIRE_PERCENT ; 
+    
+    
+    // Correction Linéaire
+    double erreurVitesseLineaire =  ; 
+    double sortieVitesseLineaire = ; 
+    double correctionVitesseLineaire = ; 
+    double correctionVitesseLineairePourcent = correctionVitesseLineaire * COEFF_VITESSE_LINEAIRE_PERCENT ;
+    
+    //Génération des consignes droite et gauche
+    robotState.vitesseDroiteConsigne = correctionVitesseLineairePourcent + correctionVitesseAngulairePourcent;
+    robotState.vitesseDroiteConsigne = LimitToInterval(robotState.vitesseDroiteConsigne, -100, 100);
+    robotState.vitesseGaucheConsigne = correctionVitesseLineairePourcent + correctionVitesseAngulairePourcent;
+    robotState.vitesseGaucheConsigne = LimitToInterval(robotState.vitesseGaucheConsigne, -100, 100);
+}
