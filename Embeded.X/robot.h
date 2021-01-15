@@ -24,6 +24,8 @@ typedef struct robotStateBITS {
             float vitesseGaucheCommandeCourante;
             float vitesseDroiteConsigne;
             float vitesseDroiteCommandeCourante;
+            float vitesseAngulaireConsigne, vitesseLineaireConsigne;
+            
             float distanceTelemetre0, distanceTelemetre1, distanceTelemetre2, distanceTelemetre3, distanceTelemetre4;
             unsigned char mode; 
             float vitesseDroitFromOdometry, vitesseGaucheFromOdometry;

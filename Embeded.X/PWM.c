@@ -2,7 +2,7 @@
 #include <xc.h> // library xc.h inclut tous les uC
 #include "IO.h"
 #include "PWM.h"
-#include "Robot.h"
+#include "robot.h"
 #include "utilities.h"
 
 #define PWMPER 40.0
@@ -68,13 +68,14 @@ void PWMSetSpeed(float vitesseEnPourcents, int numeroMoteur) {
  
 void PWMUpdateSpeed() {
     // Cette fonction est appelée sur timer et permet de suivre des rampes d?accélération
-    if (robotState.vitesseDroiteCommandeCourante < robotState.vitesseDroiteConsigne)
-        robotState.vitesseDroiteCommandeCourante = Min(
-            robotState.vitesseDroiteCommandeCourante + acceleration,
-            robotState.vitesseDroiteConsigne);
-    if (robotState.vitesseDroiteCommandeCourante > robotState.vitesseDroiteConsigne)
-        robotState.vitesseDroiteCommandeCourante = Max(robotState.vitesseDroiteCommandeCourante - acceleration, robotState.vitesseDroiteConsigne);
-
+//    if (robotState.vitesseDroiteCommandeCourante == robotState.vitesseDroiteConsigne)
+//        robotState.vitesseDroiteCommandeCourante = Min(
+//            robotState.vitesseDroiteCommandeCourante + acceleration,
+//            robotState.vitesseDroiteConsigne);
+//    if (robotState.vitesseDroiteCommandeCourante > robotState.vitesseDroiteConsigne)
+//        robotState.vitesseDroiteCommandeCourante = Max(robotState.vitesseDroiteCommandeCourante - acceleration, robotState.vitesseDroiteConsigne);
+    
+            
     if (robotState.vitesseDroiteCommandeCourante > 0) {
         RIGHT_MOTOR_ENH = 0; //pilotage de la pin en mode IO
         RIGHT_MOTOR_INH = 1; //Mise à 1 de la pin
@@ -84,15 +85,17 @@ void PWMUpdateSpeed() {
         RIGHT_MOTOR_INL = 1; //Mise à 1 de la pin
         RIGHT_MOTOR_ENH = 1; //Pilotage de la pin en mode PWM
     }
-    RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommandeCourante) * PWMPER;
-
-    if (robotState.vitesseGaucheCommandeCourante < robotState.vitesseGaucheConsigne)
-        robotState.vitesseGaucheCommandeCourante = Min(
-            robotState.vitesseGaucheCommandeCourante + acceleration,
-            robotState.vitesseGaucheConsigne);
-    if (robotState.vitesseGaucheCommandeCourante > robotState.vitesseGaucheConsigne)
-        robotState.vitesseGaucheCommandeCourante = Max(
-            robotState.vitesseGaucheCommandeCourante - acceleration, robotState.vitesseGaucheConsigne);
+    //RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommandeCourante) * PWMPER;
+    RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteConsigne) * PWMPER;
+    
+    
+//    if (robotState.vitesseGaucheCommandeCourante < robotState.vitesseGaucheConsigne)
+//        robotState.vitesseGaucheCommandeCourante = Min(
+//            robotState.vitesseGaucheCommandeCourante + acceleration,
+//            robotState.vitesseGaucheConsigne);
+//    if (robotState.vitesseGaucheCommandeCourante > robotState.vitesseGaucheConsigne)
+//        robotState.vitesseGaucheCommandeCourante = Max(
+//            robotState.vitesseGaucheCommandeCourante - acceleration, robotState.vitesseGaucheConsigne);
 
     if (robotState.vitesseGaucheCommandeCourante > 0) {
         LEFT_MOTOR_ENL = 0; //pilotage de la pin en mode IO
@@ -103,7 +106,8 @@ void PWMUpdateSpeed() {
         LEFT_MOTOR_INH = 1; //Mise à 1 de la pin
         LEFT_MOTOR_ENL = 1; //Pilotage de la pin en mode PWM
     }
-    LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante) * PWMPER;
+    //LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante) * PWMPER;
+    LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheConsigne) * PWMPER;
 }
 
 void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur) 
@@ -112,22 +116,25 @@ void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur)
         robotState.vitesseDroiteConsigne = vitesseEnPourcents;
     else if (moteur == MOTEUR_GAUCHE)
         robotState.vitesseGaucheConsigne = vitesseEnPourcents;
+    robotState.vitesseAngulaireConsigne = (robotState.vitesseDroiteConsigne - robotState.vitesseDroiteConsigne)/DISTROUES;
+    //PWMSetSpeedConsignePolaire();
 }
 
 void PWMSetSpeedConsignePolaire()
 {
+    // Calcul consigne en angulaire
+    
+    
     //Correction Angulaire 
-    double erreurVitesseAngulaire = ;
-    double sortieCorrecteurAngulaire = ; 
-    double correctionVitesseAngulaire = ;
-    double correctionVitesseAngulairePourcent = correctionVitesseAngulaire * COEFF_VITESSE_ANGULAIRE_PERCENT ; 
+    float erreurVitesseAngulaire =  robotState.vitesseAngulaireConsigne - robotState.vitesseAngulaireFromOdometry;
+    float correctionVitesseAngulaire = erreurVitesseAngulaire*Kp;
+    float correctionVitesseAngulairePourcent = correctionVitesseAngulaire * COEFF_VITESSE_ANGULAIRE_PERCENT ; 
     
     
     // Correction Linéaire
-    double erreurVitesseLineaire =  ; 
-    double sortieVitesseLineaire = ; 
-    double correctionVitesseLineaire = ; 
-    double correctionVitesseLineairePourcent = correctionVitesseLineaire * COEFF_VITESSE_LINEAIRE_PERCENT ;
+    float erreurVitesseLineaire =  robotState.vitesseLineaireConsigne - robotState.vitesseLineaireFromOdometry; 
+    float correctionVitesseLineaire = erreurVitesseLineaire*Kp;
+    float correctionVitesseLineairePourcent = correctionVitesseLineaire * COEFF_VITESSE_LINEAIRE_PERCENT ;
     
     //Génération des consignes droite et gauche
     robotState.vitesseDroiteConsigne = correctionVitesseLineairePourcent + correctionVitesseAngulairePourcent;
