@@ -1,8 +1,8 @@
-##TODO
-Fréquence Timers
-Init Random
-##PROTOCOL
-*0x30 IR DATA
-	*0x80 TEXT
-*0x61 MEASURES
-*0x50 CONSIGNS
+#TODO
+Init random
+
+##Protocol
+*0x30
+*0x50
+**0x61
+*0x80
