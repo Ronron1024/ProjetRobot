@@ -13,22 +13,11 @@ namespace RobotInterface
     {
         public Queue<byte> byteListReceived;
         public string receive_text;
+        public float vitLin;
 
         public byte[] ir_data;
 
-        public byte direction = 2;
-
         private ReliableSerialPort serialPort;
-
-        // ROBOT STATES
-        public static byte STATE_ATTENTE = 0;
-        public static byte STATE_AVANCE = 2;
-        public static byte STATE_TOURNE_GAUCHE = 4;
-        public static byte STATE_TOURNE_DROITE = 6;
-        public static byte STATE_TOURNE_SUR_PLACE_GAUCHE = 8;
-        public static byte STATE_TOURNE_SUR_PLACE_DROITE = 10;
-        public static byte STATE_SLOW = 14;
-        public static byte STATE_FAST = 15;
 
         public Robot()
         {
@@ -68,7 +57,7 @@ namespace RobotInterface
                     receive_text = System.Text.Encoding.Default.GetString(payload);
                     break;
 
-                case 0x61:
+                case 0x61: // Measures
                     string display = "";
 
                     byte[] timestamp_array = payload.GetRange(0, 4);
@@ -86,12 +75,15 @@ namespace RobotInterface
 
                     byte[] vit_lin_array = payload.GetRange(16, 4);
                     float vit_lin = vit_lin_array.GetFloat();
+                    vitLin = vit_lin;
 
                     byte[] vit_ang_array = payload.GetRange(20, 4);
                     float vit_ang = vit_ang_array.GetFloat();
 
                     display = "time=" + timestamp + "\t\t\txpos=" + xpos + "\t\t\typos=" + ypos + "\t\t\tangle=" + angle + "\t\t\tvit_lin=" + vit_lin + "\t\t\tvit_angle=" + vit_ang;
 
+
+                
                     receive_text = display;
                     break;
 

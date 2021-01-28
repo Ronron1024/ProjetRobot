@@ -4,7 +4,6 @@
 #include "PWM.h"
 #include  "IO.h"
 #include "adc.h"
-#include "strat.h"
 #include "main.h"
 #include "robot.h"
 #include "CB_TX1.h"
@@ -36,7 +35,7 @@ void InitTimer23(void) {
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
     
-    OperatingSystemLoop();
+    //OperatingSystemLoop();
 }
 // </editor-fold>
 
@@ -128,7 +127,6 @@ void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     IFS1bits.T4IF = 0;
     
     timestamp++;
-    
     SendPositionData();
 }
 // </editor-fold>

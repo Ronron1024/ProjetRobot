@@ -4,6 +4,7 @@
 #include "PWM.h"
 #include "robot.h"
 #include "utilities.h"
+#include "QEI.h"
 
 #define PWMPER 40.0
 float acceleration = 5;

@@ -3,38 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:asservDisplay="clr-namespace:WpfAsservissementDisplay;assembly=WpfAsservissementDisplay"
         xmlns:local="clr-namespace:RobotInterface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="763">
+        Title="ProjectAntolic">
     <Grid Margin="0" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textbox_out" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="5" Background="{x:Null}" Foreground="#FF18FD2D" Margin="10,0" FontFamily="Consolas" FontSize="16" IsReadOnly="True" Padding="5" HorizontalContentAlignment="Stretch"/>
-        <Label Content="COM" Margin="0" Grid.Row="3" FontFamily="Consolas" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF18FD2D"/>
-        <Button x:Name="button" Content="CLICK" Grid.Column="4" Grid.Row="3" Background="{x:Null}" Foreground="#FF18FD2D" FontFamily="Consolas" FontSize="18" BorderBrush="{x:Null}" Click="send"/>
-        <CheckBox x:Name="checkbox_led1" Content="LED1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,-1,0,0" Grid.Row="2" VerticalAlignment="Center" FontFamily="Consolas" FontSize="18" Background="#FF8D938E" Foreground="#FF18FD2D" Checked="checkbox_leds_Checked" Unchecked="checkbox_leds_Unchecked"/>
-        <CheckBox x:Name="checkbox_led2" Content="LED2" Grid.Column="2" HorizontalAlignment="Center" Margin="33,21,34,23" Grid.Row="2" VerticalAlignment="Center" FontFamily="Consolas" FontSize="18" Background="#FF8D938E" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="checkbox_leds_Checked" Unchecked="checkbox_leds_Unchecked"/>
-        <CheckBox x:Name="checkbox_led3" Content="LED3" Grid.Column="3" HorizontalAlignment="Center" Margin="35,21,33,23" Grid.Row="2" VerticalAlignment="Center" FontFamily="Consolas" FontSize="18" Background="#FF8D938E" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="checkbox_leds_Checked" Unchecked="checkbox_leds_Unchecked"/>
-        <TextBox x:Name="textbox_in" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FF18FD2D" FontSize="18" FontFamily="Consolas" VerticalContentAlignment="Center" CaretBrush="#FF18FD2D" Margin="0,0,0,10" Padding="5,0" KeyUp="textbox_in_KeyUp"/>
-        <Label x:Name="label_ir0" Content="0cm" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="44" Width="106" FontFamily="Consolas" FontSize="18" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="label_ir1" Content="0cm" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="44" Width="106" FontFamily="Consolas" FontSize="18" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"/>
-        <Label x:Name="label_ir2" Content="0cm" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="44" Width="106" FontFamily="Consolas" FontSize="18" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="2"/>
-        <Label x:Name="label_ir3" Content="0cm" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Height="44" Width="106" FontFamily="Consolas" FontSize="18" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3"/>
-        <Label x:Name="label_ir4" Content="0cm" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="44" Width="106" FontFamily="Consolas" FontSize="18" Foreground="#FF18FD2D" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="4"/>
-        <ScrollBar x:Name="scrollbar_m1" HorizontalAlignment="Left" Margin="10,21,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <ScrollBar x:Name="scrollbar_m2" Grid.Column="4" HorizontalAlignment="Left" Margin="10,21,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="label_m1" Content="50%" Grid.Row="2" FontFamily="Consolas" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF18FD2D" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="label_m2" Content="50%" Margin="0,2,0,62" Grid.Row="2" FontFamily="Consolas" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF18FD2D" Grid.Column="4" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="textbox_out" Grid.Row="0" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FF18FD2D" Margin="8" FontFamily="Consolas" FontSize="14" IsReadOnly="True" Padding="5" HorizontalContentAlignment="Stretch" Grid.RowSpan="5"/>
+        <asservDisplay:AsservissementXYThetaControl x:Name="asserv_display" Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" Margin="8"/>
+        <Button x:Name="button_0mps" Grid.Row="0" Grid.Column="2" Content="0" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_05mps" Grid.Row="1" Grid.Column="2" Content="0.5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_1mps" Grid.Row="2" Grid.Column="2" Content="1" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_15mps" Grid.Row="3" Grid.Column="2" Content="1.5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_2mps" Grid.Row="4" Grid.Column="2" Content="2" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
     </Grid>
 </Window>

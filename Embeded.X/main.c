@@ -39,7 +39,7 @@ int main(void) {
     InitPWM();
     InitADC1();
     InitUART();
-    //InitTimer23(); Void
+    //InitTimer23(); // Void
     InitTimer1(); // QEI
     InitTimer4(); // timestamp
     
@@ -51,14 +51,6 @@ int main(void) {
 //    }
     // </editor-fold>
 
-    
-    
-    
-    
-    // FIX
-    setMode(MANUAL);
-    robotState.direction = STOP;
-    
     
     
     // <editor-fold defaultstate="collapsed" desc="Main Loop">
