@@ -36,7 +36,7 @@ void PWMSetSpeed(float vitesseEnPourcents, int numeroMoteur) {
 
     if (numeroMoteur == 1) {
 
-        robotState.vitesseGaucheCommandeCourante = vitesseEnPourcents;
+        robotState.vitesseGaucheCommande = vitesseEnPourcents;
 
         if (vitesseEnPourcents > 0) {
             LEFT_MOTOR_ENH = 1; //Pilotage de la pin en mode IO
@@ -47,10 +47,10 @@ void PWMSetSpeed(float vitesseEnPourcents, int numeroMoteur) {
             LEFT_MOTOR_INH = 1; //Mise à 1 de la pin
             LEFT_MOTOR_ENH = 0; //Pilotage de la pin en mode PWM
         }
-        LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante * PWMPER);
+        LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommande * PWMPER);
     } else if (numeroMoteur == 0) {
 
-        robotState.vitesseDroiteCommandeCourante = vitesseEnPourcents;
+        robotState.vitesseDroiteCommande = vitesseEnPourcents;
 
         if (vitesseEnPourcents > 0) {
             RIGHT_MOTOR_ENL = 1; //Pilotage de la pin en mode IO
@@ -63,21 +63,21 @@ void PWMSetSpeed(float vitesseEnPourcents, int numeroMoteur) {
         }
 
 
-        RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommandeCourante * PWMPER);
+        RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommande * PWMPER);
     }
 }
  
 void PWMUpdateSpeed() {
-    // Cette fonction est appelée sur timer et permet de suivre des rampes d?accélération
-//    if (robotState.vitesseDroiteCommandeCourante == robotState.vitesseDroiteConsigne)
-//        robotState.vitesseDroiteCommandeCourante = Min(
-//            robotState.vitesseDroiteCommandeCourante + acceleration,
-//            robotState.vitesseDroiteConsigne);
-//    if (robotState.vitesseDroiteCommandeCourante > robotState.vitesseDroiteConsigne)
-//        robotState.vitesseDroiteCommandeCourante = Max(robotState.vitesseDroiteCommandeCourante - acceleration, robotState.vitesseDroiteConsigne);
+    // Cette fonction est appelée sur timer et permet de suivre des rampes d'accélération
+    if (robotState.vitesseDroiteCommande == robotState.vitesseDroiteConsigne)
+        robotState.vitesseDroiteCommande = Min(
+            robotState.vitesseDroiteCommande + acceleration,
+            robotState.vitesseDroiteConsigne);
+    if (robotState.vitesseDroiteCommande > robotState.vitesseDroiteConsigne)
+        robotState.vitesseDroiteCommande = Max(robotState.vitesseDroiteCommande - acceleration, robotState.vitesseDroiteConsigne);
     
             
-    if (robotState.vitesseDroiteCommandeCourante > 0) {
+    if (robotState.vitesseDroiteCommande > 0) {
         RIGHT_MOTOR_ENH = 0; //pilotage de la pin en mode IO
         RIGHT_MOTOR_INH = 1; //Mise à 1 de la pin
         RIGHT_MOTOR_ENL = 1; //Pilotage de la pin en mode PWM
@@ -86,19 +86,18 @@ void PWMUpdateSpeed() {
         RIGHT_MOTOR_INL = 1; //Mise à 1 de la pin
         RIGHT_MOTOR_ENH = 1; //Pilotage de la pin en mode PWM
     }
-    //RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommandeCourante) * PWMPER;
-    RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteConsigne) * PWMPER;
+    RIGHT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseDroiteCommande) * PWMPER;
     
     
-//    if (robotState.vitesseGaucheCommandeCourante < robotState.vitesseGaucheConsigne)
-//        robotState.vitesseGaucheCommandeCourante = Min(
-//            robotState.vitesseGaucheCommandeCourante + acceleration,
-//            robotState.vitesseGaucheConsigne);
-//    if (robotState.vitesseGaucheCommandeCourante > robotState.vitesseGaucheConsigne)
-//        robotState.vitesseGaucheCommandeCourante = Max(
-//            robotState.vitesseGaucheCommandeCourante - acceleration, robotState.vitesseGaucheConsigne);
+    if (robotState.vitesseGaucheCommande < robotState.vitesseGaucheConsigne)
+        robotState.vitesseGaucheCommande = Min(
+            robotState.vitesseGaucheCommande + acceleration,
+            robotState.vitesseGaucheConsigne);
+    if (robotState.vitesseGaucheCommande > robotState.vitesseGaucheConsigne)
+        robotState.vitesseGaucheCommande = Max(
+            robotState.vitesseGaucheCommande - acceleration, robotState.vitesseGaucheConsigne);
 
-    if (robotState.vitesseGaucheCommandeCourante > 0) {
+    if (robotState.vitesseGaucheCommande > 0) {
         LEFT_MOTOR_ENL = 0; //pilotage de la pin en mode IO
         LEFT_MOTOR_INL = 1; //Mise à 1 de la pin
         LEFT_MOTOR_ENH = 1; //Pilotage de la pin en mode PWM
@@ -107,8 +106,7 @@ void PWMUpdateSpeed() {
         LEFT_MOTOR_INH = 1; //Mise à 1 de la pin
         LEFT_MOTOR_ENL = 1; //Pilotage de la pin en mode PWM
     }
-    //LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommandeCourante) * PWMPER;
-    LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheConsigne) * PWMPER;
+    LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommande) * PWMPER;
 }
 
 void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur) 
@@ -117,8 +115,8 @@ void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur)
         robotState.vitesseDroiteConsigne = vitesseEnPourcents;
     else if (moteur == MOTEUR_GAUCHE)
         robotState.vitesseGaucheConsigne = vitesseEnPourcents;
+    
     robotState.vitesseAngulaireConsigne = (robotState.vitesseDroiteConsigne - robotState.vitesseDroiteConsigne)/DISTROUES;
-    //PWMSetSpeedConsignePolaire();
 }
 
 void PWMSetSpeedConsignePolaire()

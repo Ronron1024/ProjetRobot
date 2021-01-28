@@ -1,5 +1,6 @@
 ## TODO
 - [x] Message.cs
+- [x] Parrot
 - [ ] Init random
 ## Protocol
 * *0x20* : Led setup

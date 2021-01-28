@@ -1,6 +1,7 @@
 #include <xc.h>
 #include "uart.h"
 #include "uart_protocol.h"
+#include "utilities.h"
 #include "CB_TX1.h"
 #include "CB_RX1.h"
 #include "IO.h"
@@ -132,8 +133,7 @@ void uartProcessDecodedMessage(unsigned short int func, unsigned short int paylo
             break;
             
         case 0x50:
-            robotState.task = payload[0];
-            robotState.direction = payload[1];
+            robotState.vitesseLineaireConsigne = getFloat(payload, 0);
             break;
 
         default: // Unknow command

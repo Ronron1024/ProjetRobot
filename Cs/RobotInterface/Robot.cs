@@ -14,6 +14,7 @@ namespace RobotInterface
         public Queue<byte> byteListReceived;
         public string receive_text;
         public float vitLin;
+        public float vitLinCons;
 
         public byte[] ir_data;
 
@@ -58,8 +59,6 @@ namespace RobotInterface
                     break;
 
                 case 0x61: // Measures
-                    string display = "";
-
                     byte[] timestamp_array = payload.GetRange(0, 4);
                     Array.Reverse(timestamp_array);
                     int timestamp = BitConverter.ToInt32(timestamp_array, 0);
@@ -74,17 +73,15 @@ namespace RobotInterface
                     float angle = angle_array.GetFloat();
 
                     byte[] vit_lin_array = payload.GetRange(16, 4);
-                    float vit_lin = vit_lin_array.GetFloat();
-                    vitLin = vit_lin;
+                    vitLin = vit_lin_array.GetFloat();
 
                     byte[] vit_ang_array = payload.GetRange(20, 4);
                     float vit_ang = vit_ang_array.GetFloat();
 
-                    display = "time=" + timestamp + "\t\t\txpos=" + xpos + "\t\t\typos=" + ypos + "\t\t\tangle=" + angle + "\t\t\tvit_lin=" + vit_lin + "\t\t\tvit_angle=" + vit_ang;
+                    byte[] vit_lin_cons = payload.GetRange(24, 4);
+                    vitLinCons = vit_lin_cons.GetFloat();
 
-
-                
-                    receive_text = display;
+                    receive_text = "Timestamp : " + timestamp;
                     break;
 
                 default: // Unknow command

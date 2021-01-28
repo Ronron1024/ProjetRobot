@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using MouseKeyboardActivityMonitor.WinApi;
 using MouseKeyboardActivityMonitor;
-using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace RobotInterface
 {
@@ -48,6 +48,9 @@ namespace RobotInterface
             while (robot.byteListReceived.Count != 0)
                 textbox_out.Text += "0x" + robot.byteListReceived.Dequeue().ToString("X2") + " ";
 
+            asserv_display.UpdateIndependantOdometrySpeed(robot.vitLin, 0, 0, 0);
+            asserv_display.UpdateIndependantSpeedConsigneValues(robot.vitLinCons, 0, 0, 0);
+
             if (robot.receive_text != "")
             {
                 textbox_out.Text += robot.receive_text + "\n";
@@ -65,9 +68,12 @@ namespace RobotInterface
 
         private void buttons_vit_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.Button src = e.Source as System.Windows.Controls.Button;
-            
-            //robot.uartEncodeAndSendMsg(0x)
+            Button src = e.Source as Button;
+
+            float speed = float.Parse(src.Content.ToString());
+            byte[] bspeed = BitConverter.GetBytes(speed);
+
+            robot.uartEncodeAndSendMsg(0x50, 4, bspeed);
         }
     }
 }

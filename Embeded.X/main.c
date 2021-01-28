@@ -51,8 +51,6 @@ int main(void) {
 //    }
     // </editor-fold>
 
-    
-    
     // <editor-fold defaultstate="collapsed" desc="Main Loop">
     while (1) {
         
@@ -90,7 +88,5 @@ int main(void) {
     }
     // </editor-fold>
 
-    
-    
     return 0;
 }

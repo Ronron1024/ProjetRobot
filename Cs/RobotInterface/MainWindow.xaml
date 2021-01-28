@@ -23,9 +23,9 @@
         <TextBox x:Name="textbox_out" Grid.Row="0" TextWrapping="Wrap" Background="{x:Null}" Foreground="#FF18FD2D" Margin="8" FontFamily="Consolas" FontSize="14" IsReadOnly="True" Padding="5" HorizontalContentAlignment="Stretch" Grid.RowSpan="5"/>
         <asservDisplay:AsservissementXYThetaControl x:Name="asserv_display" Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" Margin="8"/>
         <Button x:Name="button_0mps" Grid.Row="0" Grid.Column="2" Content="0" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
-        <Button x:Name="button_05mps" Grid.Row="1" Grid.Column="2" Content="0.5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_05mps" Grid.Row="1" Grid.Column="2" Content="0,5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
         <Button x:Name="button_1mps" Grid.Row="2" Grid.Column="2" Content="1" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
-        <Button x:Name="button_15mps" Grid.Row="3" Grid.Column="2" Content="1.5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
+        <Button x:Name="button_15mps" Grid.Row="3" Grid.Column="2" Content="1,5" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
         <Button x:Name="button_2mps" Grid.Row="4" Grid.Column="2" Content="2" FontSize="48" FontWeight="Bold" Background="{x:Null}" Foreground="#FF18FD2D" Cursor="Cross" Click="buttons_vit_Click"></Button>
     </Grid>
 </Window>
