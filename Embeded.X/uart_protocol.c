@@ -134,8 +134,7 @@ void uartProcessDecodedMessage(unsigned short int func, unsigned short int paylo
             
         case 0x50:
             robotState.vitesseLineaireConsigne = getFloat(payload, 0);
-            PWMSetSpeedConsigne(getFloat(payload, 0), MOTEUR_DROIT);
-            PWMSetSpeedConsigne(getFloat(payload, 0), MOTEUR_GAUCHE);
+            robotState.vitesseAngulaireConsigne = getFloat(payload, 0);
             break;
 
         default: // Unknow command

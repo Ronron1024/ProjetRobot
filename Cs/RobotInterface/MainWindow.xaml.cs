@@ -48,8 +48,9 @@ namespace RobotInterface
             while (robot.byteListReceived.Count != 0)
                 textbox_out.Text += "0x" + robot.byteListReceived.Dequeue().ToString("X2") + " ";
 
-            asserv_display.UpdateIndependantOdometrySpeed(robot.vitLin, 0, 0, 0);
-            asserv_display.UpdateIndependantSpeedConsigneValues(robot.vitLinCons, 0, 0, 0);
+            asserv_display.UpdateIndependantOdometrySpeed(0, 0, robot.vitLin, robot.vitAng);
+            asserv_display.UpdateIndependantSpeedConsigneValues(0, 0, robot.vitLinCons, robot.vitAngCons);
+
 
             if (robot.receive_text != "")
             {

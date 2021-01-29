@@ -13,8 +13,8 @@ namespace RobotInterface
     {
         public Queue<byte> byteListReceived;
         public string receive_text;
-        public float vitLin;
-        public float vitLinCons;
+        public float vitLin, vitAng;
+        public float vitLinCons, vitAngCons;
 
         public byte[] ir_data;
 
@@ -76,10 +76,13 @@ namespace RobotInterface
                     vitLin = vit_lin_array.GetFloat();
 
                     byte[] vit_ang_array = payload.GetRange(20, 4);
-                    float vit_ang = vit_ang_array.GetFloat();
+                    vitAng = vit_ang_array.GetFloat();
 
                     byte[] vit_lin_cons = payload.GetRange(24, 4);
                     vitLinCons = vit_lin_cons.GetFloat();
+
+                    byte[] vit_ang_cons = payload.GetRange(28, 4);
+                    vitAngCons = vit_ang_cons.GetFloat();
 
                     receive_text = "Timestamp : " + timestamp;
                     break;

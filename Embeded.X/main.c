@@ -83,6 +83,7 @@ int main(void) {
         
         for (i = 0; i < CB_RX1_GetDataSize(); i++)
         {
+            
             uartDecodeMessage(CB_RX1_Get());
         }
     }
