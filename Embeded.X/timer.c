@@ -81,6 +81,8 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
 
     //ADC1StartConversionSequence();
     QEIUpdateData();
+    PWMUpdateSpeed();
+    PWMSetSpeedConsignePolaire();
     
     //Tous les 5 fois, on renvoie ici la trame de debug Asserv
     
