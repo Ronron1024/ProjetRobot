@@ -11,9 +11,9 @@
 #define MOTEUR_DROIT 0
 #define MOTEUR_GAUCHE 1
 
-#define COEFF_VITESSE_LINEAIRE_PERCENT 0
+#define COEFF_VITESSE_LINEAIRE_PERCENT 23
 #define COEFF_VITESSE_ANGULAIRE_PERCENT 3.5
-#define KpLin 0
+#define KpLin 10
 #define KpAng 13
 
 void InitPWM(void); 

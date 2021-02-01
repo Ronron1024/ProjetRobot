@@ -82,9 +82,14 @@ void PWMSetSpeedConsignePolaire()
     float error_vit_ang = robotState.vitesseAngulaireConsigne - robotState.vitesseAngulaireFromOdometry;
     float out_corr_ang = error_vit_ang * KpAng;
     float corr_vit_ang = out_corr_ang * DISTROUES / 2 * COEFF_VITESSE_ANGULAIRE_PERCENT;
-    robotState.vitesseDroiteCommande = corr_vit_ang * COEFF_VITESSE_ANGULAIRE_PERCENT;
+    
+    float error_vit_lin = robotState.vitesseLineaireConsigne - robotState.vitesseLineaireFromOdometry;
+    float out_corr_lin = error_vit_lin * KpLin;
+    float corr_vit_lin = out_corr_lin * 1 / 2 * COEFF_VITESSE_LINEAIRE_PERCENT;
+    
+    robotState.vitesseDroiteCommande = corr_vit_lin + corr_vit_ang;
     robotState.vitesseDroiteCommande = LimitToInterval(robotState.vitesseDroiteCommande, -100, 100);
-    robotState.vitesseGaucheCommande = - corr_vit_ang * COEFF_VITESSE_ANGULAIRE_PERCENT;
+    robotState.vitesseGaucheCommande = corr_vit_lin - corr_vit_ang;
     robotState.vitesseGaucheCommande = LimitToInterval(robotState.vitesseGaucheCommande, -100, 100);
     
 }
