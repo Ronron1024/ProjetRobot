@@ -134,7 +134,7 @@ void uartProcessDecodedMessage(unsigned short int func, unsigned short int paylo
             
         case 0x50:
             robotState.vitesseLineaireConsigne = getFloat(payload, 0);
-            robotState.vitesseAngulaireConsigne = getFloat(payload, 0);
+            robotState.vitesseAngulaireConsigne = 0;//getFloat(payload, 0)*PI;
             break;
 
         default: // Unknow command

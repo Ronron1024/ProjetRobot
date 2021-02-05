@@ -8,7 +8,7 @@
 
 #define PWMPER 40.0
 float acceleration = 5;
-float out_corr_angI= 0;
+
 
 void InitPWM(void) {
     PTCON2bits.PCLKDIV = 0b000; //Divide by 1
@@ -54,26 +54,29 @@ void PWMUpdateSpeed() {
     LEFT_MOTOR_DUTY_CYCLE = Abs(robotState.vitesseGaucheCommande) * PWMPER;
 }
 
-void PWMSetSpeedConsignePolaire()
+float out_corr_angI= 0;
+float corr_vit_linI = 0;
+
+void UpdateAsservissement()
 {
-    robotState.vitesseDroiteConsigne = robotState.vitesseLineaireConsigne + robotState.vitesseAngulaireConsigne * DISTROUES / 2;
-    robotState.vitesseGaucheConsigne = robotState.vitesseLineaireConsigne - robotState.vitesseAngulaireConsigne * DISTROUES / 2;
+    //robotState.vitesseDroiteConsigne = robotState.vitesseLineaireConsigne + robotState.vitesseAngulaireConsigne * DISTROUES / 2;
+    //robotState.vitesseGaucheConsigne = robotState.vitesseLineaireConsigne - robotState.vitesseAngulaireConsigne * DISTROUES / 2;
     
     
      
     float error_vit_ang = robotState.vitesseAngulaireConsigne - robotState.vitesseAngulaireFromOdometry;
     float out_corr_angP = error_vit_ang * KpAng;
     out_corr_angI = (error_vit_ang * KiAng)/FREQ_ECH_QEI + out_corr_angI;
-    float out_corr_ang = out_corr_angP + out_corr_angI;
-    float corr_vit_ang = out_corr_ang * DISTROUES / 2 * COEFF_VITESSE_ANGULAIRE_PERCENT;
+    float out_corr_ang = (out_corr_angP + out_corr_angI)*COEFF_VITESSE_ANGULAIRE_PERCENT;
     
     float error_vit_lin = robotState.vitesseLineaireConsigne - robotState.vitesseLineaireFromOdometry;
-    float out_corr_lin = error_vit_lin * KpLin;
-    float corr_vit_lin = out_corr_lin * 1 / 2 * COEFF_VITESSE_LINEAIRE_PERCENT;
+    float out_corr_linP = error_vit_lin * KpLin;
+    corr_vit_linI = (error_vit_lin*KiLin/FREQ_ECH_QEI) + corr_vit_linI;
+    float out_corr_lin = (out_corr_linP + corr_vit_linI)* COEFF_VITESSE_LINEAIRE_PERCENT;
     
-    robotState.vitesseDroiteCommande =  corr_vit_lin - corr_vit_ang;
+    robotState.vitesseDroiteCommande =  out_corr_lin + out_corr_ang * DISTROUES / 2;
     robotState.vitesseDroiteCommande = LimitToInterval(robotState.vitesseDroiteCommande, -100, 100);
-    robotState.vitesseGaucheCommande = corr_vit_lin + corr_vit_ang;
+    robotState.vitesseGaucheCommande = out_corr_lin - out_corr_ang * DISTROUES / 2;
     robotState.vitesseGaucheCommande = LimitToInterval(robotState.vitesseGaucheCommande, -100, 100);
     
 }
