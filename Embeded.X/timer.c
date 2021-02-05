@@ -77,10 +77,7 @@ void SetFreqTimer1(float freq) {
 
 // Timer1 Interrupt
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
-    IFS0bits.T1IF = 0;   
-
-    robotState.vitesseLineaireConsigne = 1;
-    robotState.vitesseAngulaireConsigne = 0;
+    IFS0bits.T1IF = 0; 
     
     //ADC1StartConversionSequence();
     QEIUpdateData();

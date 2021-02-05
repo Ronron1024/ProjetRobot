@@ -13,8 +13,9 @@
 
 #define COEFF_VITESSE_LINEAIRE_PERCENT 23
 #define COEFF_VITESSE_ANGULAIRE_PERCENT 3.5
-#define KpLin 10
-#define KpAng 13
+#define KpLin 0
+#define KpAng 7
+#define KiAng 0
 
 void InitPWM(void); 
 void PWMUpdateSpeed();

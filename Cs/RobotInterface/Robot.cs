@@ -26,7 +26,7 @@ namespace RobotInterface
             receive_text = "";
             ir_data = new byte[5] { 0, 0, 0, 0, 0 };
 
-            serialPort = new ReliableSerialPort("COM12", 115200, Parity.None, 8, StopBits.One);
+            serialPort = new ReliableSerialPort("COM23", 115200, Parity.None, 8, StopBits.One);
             serialPort.DataReceived += SerialPort_DataReceived;
             serialPort.Open();
         }
@@ -83,6 +83,7 @@ namespace RobotInterface
 
                     byte[] vit_ang_cons = payload.GetRange(28, 4);
                     vitAngCons = vit_ang_cons.GetFloat();
+                   
 
                     receive_text = "Timestamp : " + timestamp;
                     break;
